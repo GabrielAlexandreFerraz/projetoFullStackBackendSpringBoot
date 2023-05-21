@@ -8,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -17,6 +20,13 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRepository repository;
+
+    @GetMapping
+    public List<ProdutoFormRequest> getLista(){
+        return repository.findAll().stream()
+                .map( prod -> ProdutoFormRequest.fromModel(prod))
+                .collect(Collectors.toList());
+    }
 
 
     @PostMapping
