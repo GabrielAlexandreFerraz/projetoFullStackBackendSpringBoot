@@ -28,6 +28,16 @@ public class ProdutoController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<ProdutoFormRequest> getById(@PathVariable Long id){
+        Optional<Produto> produtoExistente = repository.findById(id);
+        if(produtoExistente.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        var produto = produtoExistente.map(prod -> ProdutoFormRequest.fromModel(prod)).get();
+        return ResponseEntity.ok(produto);
+    }
+
 
     @PostMapping
     public ProdutoFormRequest salvar(@RequestBody ProdutoFormRequest produto){
