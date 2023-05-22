@@ -22,16 +22,16 @@ public class ProdutoController {
     private ProdutoRepository repository;
 
     @GetMapping
-    public List<ProdutoFormRequest> getLista(){
+    public List<ProdutoFormRequest> getLista() {
         return repository.findAll().stream()
-                .map( prod -> ProdutoFormRequest.fromModel(prod))
+                .map(prod -> ProdutoFormRequest.fromModel(prod))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProdutoFormRequest> getById(@PathVariable Long id){
+    public ResponseEntity<ProdutoFormRequest> getById(@PathVariable Long id) {
         Optional<Produto> produtoExistente = repository.findById(id);
-        if(produtoExistente.isEmpty()){
+        if (produtoExistente.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         var produto = produtoExistente.map(prod -> ProdutoFormRequest.fromModel(prod)).get();
@@ -40,22 +40,33 @@ public class ProdutoController {
 
 
     @PostMapping
-    public ProdutoFormRequest salvar(@RequestBody ProdutoFormRequest produto){
+    public ProdutoFormRequest salvar(@RequestBody ProdutoFormRequest produto) {
         Produto entidadeProduto = produto.toModel();
         repository.save(entidadeProduto);
         return ProdutoFormRequest.fromModel(entidadeProduto);
-        }
+    }
 
-        @PutMapping("{id}")
-        public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody ProdutoFormRequest produto){
+    @PutMapping("{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody ProdutoFormRequest produto) {
         Optional<Produto> produtoExistente = repository.findById(id);
-        if(produtoExistente.isEmpty()){
+        if (produtoExistente.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Produto entidade = produto.toModel();
         entidade.setId(id);
         repository.save(entidade);
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        Optional<Produto> produtoExistente = repository.findById(id);
+        if (produtoExistente.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
+        repository.delete(produtoExistente.get());
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
