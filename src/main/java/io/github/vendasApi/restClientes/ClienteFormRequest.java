@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.vendasApi.model.Cliente;
 import io.github.vendasApi.model.Produto;
 import io.github.vendasApi.restProdutos.ProdutoFormRequest;
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +16,12 @@ public class ClienteFormRequest {
     private Long id;
     private String nome;
     private String cpf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private String endereco;
     private String email;
     private String telefone;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate cadastro;
 
     public ClienteFormRequest() {
@@ -46,6 +49,10 @@ public class ClienteFormRequest {
         this.email = email;
         this.telefone = telefone;
         this.cadastro = cadastro;
+    }
+    @PrePersist
+    public void prePersis(){
+        setCadastro(LocalDate.now());
     }
 
     public Long getId() {
