@@ -1,10 +1,10 @@
 package io.github.vendasApi.restClientes;
 
 import io.github.vendasApi.model.Cliente;
-import io.github.vendasApi.model.Produto;
 import io.github.vendasApi.repository.ClienteRepository;
-import io.github.vendasApi.restProdutos.ProdutoFormRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,12 +63,13 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<ClienteFormRequest> getLista(){
-        return repository
-                .findAll()
-                .stream()
-                .map( ClienteFormRequest::fromModel )
-                .collect(Collectors.toList());
+    public Page<ClienteFormRequest> getLista(
+            @RequestParam( value = "nome", required = false, defaultValue = "") String nome,
+            @RequestParam(value = "cpf", required = false, defaultValue = "") String cpf,
+            Pageable pageable
+    ){
+        return repository.buscarPorNomeCpf("%"+ nome + "%","%"+ cpf + "%",pageable)
+                .map(ClienteFormRequest::fromModel);
     }
 
 }

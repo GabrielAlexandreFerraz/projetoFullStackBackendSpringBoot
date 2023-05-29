@@ -60,6 +60,11 @@ public class Cliente {
         this.email = email;
     }
 
+    @PrePersist
+    public void prePersist(){
+        setDataCadastro(LocalDate.now());
+    }
+
     public Long getId() {
         return id;
     }
@@ -129,7 +134,5 @@ public class Cliente {
         return "Cliente [id=" + id + ", nascimento=" + nascimento + ", cpf=" + cpf + ", nome=" + nome + ", endereco="
                 + endereco + ", telefone=" + telefone + ", email=" + email + ", dataCadastro=" + dataCadastro + "]";
     }
-
-
 
 }

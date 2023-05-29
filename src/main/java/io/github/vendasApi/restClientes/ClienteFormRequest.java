@@ -50,10 +50,6 @@ public class ClienteFormRequest {
         this.telefone = telefone;
         this.cadastro = cadastro;
     }
-    @PrePersist
-    public void prePersis(){
-        setCadastro(LocalDate.now());
-    }
 
     public Long getId() {
         return id;
