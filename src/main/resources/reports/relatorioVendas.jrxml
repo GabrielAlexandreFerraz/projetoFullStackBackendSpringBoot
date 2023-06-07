@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioVendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21e3b382-4b21-47ae-b3e8-8dcfc2e91bad">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="banco-dados-vendas.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select v.id as codigo,
+		c.nome as nomeCliente,
+		v.total as total,
+		v.forma_pagamento		
+from venda as v
+join cliente as c on c.id = v.id_cliente]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="nomecliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nomecliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="nomecliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="forma_pagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="forma_pagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="forma_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<variable name="forma_pagamento1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{forma_pagamento}]]></variableExpression>
+	</variable>
+	<variable name="forma_pagamento2" class="java.lang.Integer" resetType="Column" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{forma_pagamento}]]></variableExpression>
+	</variable>
+	<variable name="total1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total2" class="java.lang.Integer" resetType="Column" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total3" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total4" class="java.math.BigDecimal" resetType="Column" calculation="Average">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total5" class="java.math.BigDecimal" resetType="Column" calculation="Lowest">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total6" class="java.math.BigDecimal" resetType="Column" calculation="Highest">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total7" class="java.math.BigDecimal" resetType="Column" calculation="StandardDeviation">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total8" class="java.math.BigDecimal" resetType="Column" calculation="Variance">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total9" class="java.math.BigDecimal" resetType="Column" calculation="System">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total10" class="java.math.BigDecimal" resetType="Column" calculation="First">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total11" class="java.lang.Integer" resetType="Column" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total12" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total13" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="28" width="550" height="30" backcolor="#BDBBBB" uuid="998138c7-cd02-4f40-af8f-b0f0c60e83c3"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Vendas]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy hh:mm">
+				<reportElement x="448" y="1" width="104" height="24" uuid="5dbdcb2c-cf4f-4375-8ac5-0f441766d6b6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="383" y="1" width="64" height="24" uuid="834a66d6-ed7f-460f-9964-235905299c21"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Gerado em:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="100" height="19" forecolor="#FFFFFF" backcolor="#BDB7B7" uuid="b6505138-7575-4eb0-b932-a9bddff17f68">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="863ee465-5a5e-4829-8c71-b2e508121a2d"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="0" width="280" height="19" forecolor="#FFFFFF" backcolor="#BDB7B7" uuid="a95b3e2b-bd50-48f5-9978-2f1d8e64b1dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="142405ba-9402-4edb-9632-ac16bb47bd52"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="0" width="100" height="19" forecolor="#FFFFFF" backcolor="#BDB7B7" uuid="04d78091-7243-4f13-b232-911d0c4a161d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38871ca3-0718-435b-b3b6-12e7496510dd"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma Pag.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="73" height="19" forecolor="#FFFFFF" backcolor="#BDB7B7" uuid="73263f10-b11d-4ee6-af44-64296fffec3e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38871ca3-0718-435b-b3b6-12e7496510dd"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="1" width="553" height="30" backcolor="#F5F5F5" uuid="4fa2035e-e70d-4271-8608-dfc0a4e541f7">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($V{REPORT_COUNT}%2==0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="31" uuid="a22e188a-6916-4b47-95af-418e42ea2da6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="863ee465-5a5e-4829-8c71-b2e508121a2d"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="280" height="31" uuid="f7caf13b-2fd2-4f62-8174-78921e78cf66">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="142405ba-9402-4edb-9632-ac16bb47bd52"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomecliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="1" width="100" height="30" uuid="7eddd79d-ae6a-455d-b057-ed4b44530d2c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38871ca3-0718-435b-b3b6-12e7496510dd"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{forma_pagamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,#00.##;¤-#,#00.##">
+				<reportElement x="480" y="1" width="73" height="30" uuid="ea242e2a-92d5-4f55-814f-9b29ecb47aa9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<textField pattern="¤#,#00.##;¤-#,#00.##">
+				<reportElement mode="Opaque" x="480" y="0" width="73" height="30" backcolor="#F5F5F5" uuid="05901f66-cd4a-4585-86f7-5b4b8461fb91"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total13}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="30" uuid="032068be-bb9a-4953-aab5-62a6cfd9c626"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Vendas:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="352" y="9" width="100" height="30" uuid="e088322c-b0cb-4793-b04d-26e68fdd675f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="453" y="9" width="100" height="30" uuid="e385afee-ddc2-4104-b1eb-457d8cba5b83"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<noData>
+		<band height="50"/>
+	</noData>
+</jasperReport>
