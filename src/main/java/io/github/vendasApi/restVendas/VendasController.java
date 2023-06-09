@@ -3,7 +3,8 @@ package io.github.vendasApi.restVendas;
 import io.github.vendasApi.model.Venda;
 import io.github.vendasApi.repository.ItemVendaRepository;
 import io.github.vendasApi.repository.VendaRepository;
-import io.github.vendasApi.RelatorioVendasService;
+import io.github.vendasApi.service.RelatorioVendasService;
+import io.github.vendasApi.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 @RestController
 @RequestMapping("/api/vendas")
 @CrossOrigin("*")
@@ -34,16 +36,31 @@ public class VendasController {
             itemVendaRepository.saveAll(venda.getItens());
     }
 
-    @GetMapping("relatorio-vendas")
-    public ResponseEntity<byte[]> relatorioVendas(){
-        byte[] relatorioGerado= relatorioVendasService.gerarRelatorio();
-        HttpHeaders headers = new HttpHeaders();
-        var fileName = "relatorioVendas.pdf";
+    @GetMapping("/relatorio-vendas")
+    public ResponseEntity<byte[]> relatorioVendas(
+            @RequestParam(value = "id", required = false, defaultValue = "") Long id,
+            @RequestParam(value = "inicio", required= false, defaultValue = "") String inicio,
+            @RequestParam(value = "fim", required= false, defaultValue = "") String fim
+    ){
+        Date dataInicio = DateUtils.fromString(inicio);
+        Date dataFim = DateUtils.fromString(fim, true);
 
-        headers.setContentDispositionFormData("inline; filename=\"" + fileName + "\"",fileName);
-       headers.setCacheControl("must-revalidade, post-check=0, pre-check=0");
-       var responseEntity = new ResponseEntity<>(relatorioGerado,headers, HttpStatus.OK);
-       return responseEntity;
+        if(dataInicio == null) {
+            dataInicio = DateUtils.DATA_INICIO_PADRAO;
+        }
+
+        if(dataFim == null) {
+            dataFim = DateUtils.hoje(true);
+        }
+
+        var relatorioGerado = relatorioVendasService.gerarRelatorio(id, dataInicio, dataFim);
+        var headers = new HttpHeaders();
+        var fileName = "relatorio-vendas.pdf";
+        headers.setContentDispositionFormData("inline; filename=\"" +fileName+ "\"", fileName);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        var responseEntity = new ResponseEntity<>(relatorioGerado, headers, HttpStatus.OK);
+        return responseEntity;
     }
+
 
 }
