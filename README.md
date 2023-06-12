@@ -31,9 +31,7 @@ Um endpoint /api/clientes
 - Deletar um cliente por ID
 
 Um endpoint /api/dashboard
-- Com apenas um Get para buscar
-- todas as vendas, clientes e produtos
-- para gerar um gráfico na página Home.
+- Com apenas um Get para buscar todas as vendas, clientes e produtos para gerar um gráfico na página Home.
 
 
 ## Back end
