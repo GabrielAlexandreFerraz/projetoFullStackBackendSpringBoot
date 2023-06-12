@@ -23,14 +23,14 @@ Um endpoint /api/produtos
 - Atualizar um produto por ID
 - Deletar um produto por ID
 
-- Um endpoint /api/clientes
+Um endpoint /api/clientes
 - Buscar todos os clientes
 - Buscar um cliente por ID
 - Adicionar um novo cliente
 - Atualizar um cliente por ID
 - Deletar um cliente por ID
 
-- Um endpoint /api/dashboard
+Um endpoint /api/dashboard
 - Com apenas um Get para buscar
   todas as vendas, clientes e produtos
   para gerar um gráfico na página Home.
