@@ -32,8 +32,8 @@ Um endpoint /api/clientes
 
 Um endpoint /api/dashboard
 - Com apenas um Get para buscar
-  todas as vendas, clientes e produtos
-  para gerar um gráfico na página Home.
+- todas as vendas, clientes e produtos
+- para gerar um gráfico na página Home.
 
 
 ## Back end
